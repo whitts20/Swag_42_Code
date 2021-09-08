@@ -18,7 +18,7 @@ char	**ft_split(char const *s, char c)
 			count++;
 		i++;
 	}
-	split = (char **) malloc(sizeof(char) * (i + c + 1)
+	split = (char **) malloc(sizeof(char) * (i + c + 1));
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -32,5 +32,5 @@ char	**ft_split(char const *s, char c)
 		k++;
 	}
 	split[j][k] = '\0';
-	return (split)
+	return (split);
 }
