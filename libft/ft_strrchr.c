@@ -14,8 +14,8 @@ char	*strrchr(const char *s, int c)
 		i++;
 	}
 	if (pos != 0)
-		return (s + pos);
+		return ((char *)s + pos);
 	if (s[i] == '\0' && c == '\0')
-		return (s + i);
+		return ((char *)s + i);
 	return (NULL);
 }

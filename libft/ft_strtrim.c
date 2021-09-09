@@ -1,40 +1,56 @@
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+int	ft_start(char const *s1, char const *set)
 {
-	size_t	i;
-	size_t	j;
-	size_t	s;
-	size_t	e;
-	char	*trim;
+	int		i;
+	int		s;
 
 	i = 0;
 	s = 0;
-	e = 0;
 	while (s1[i] == set[i])
 	{
 		s++;
 		i++;
 	}
-	i = ft_strlen(s1) - 1;
-	j = ft_strlen(set) - 1;
-	while (s1[i] == set[j])
+	return (s);
+}
+
+int	ft_end(char const *s1, char const *set)
+{
+	int	k;
+	int	l;
+	int	e;
+
+	k = ft_strlen(s1) - 1;
+	l = ft_strlen(set) - 1;
+	e = 0;
+	while (s1[k] == set[l])
 	{
 		e++;
-		i--;
-		j--;
+		k--;
+		l--;
 	}
-	trim = (char *) malloc(sizeof(char) * (ft_strlen(s1) - s - e));
+	return (e);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		m;
+	int		n;
+	char	*trim;
+
+	trim = (char *) malloc(sizeof(char)
+			* (ft_strlen(s1) - ft_start(s1, set) - ft_end(s1, set)));
 	if (trim == NULL)
 		return (NULL);
-	i = s;
-	j = 0;
-	while (i < ft_strlen(s1) - 1 - e)
+	m = ft_start(s1, set);
+	n = 0;
+	while (m < (int)ft_strlen(s1) - 1 - ft_end(s1, set))
 	{
-		trim[j] = s1[i];
-		i++;
-		j++;
+		trim[n] = s1[m];
+		m++;
+		n++;
 	}
-	trim[j] = '\0';
+	trim[n] = '\0';
 	return (trim);
 }

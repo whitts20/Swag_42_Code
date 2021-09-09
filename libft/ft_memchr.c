@@ -4,18 +4,18 @@ void	*memchr(const void *s, int c, size_t n)
 {
 	unsigned char	*str;
 	unsigned char	chr;
-	int				i;
+	size_t			i;
 
 	str = (unsigned char *) s;
 	chr = (unsigned char) c;
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != '\0' && i < n)
 	{
 		if (str[i] == chr)
-			return (str[i]);
+			return ((unsigned char *)s + i);
 		i++;
 	}
 	if (str[i] == '\0' && chr == '\0')
-		return (str[i]);
+		return ((unsigned char *)s + i);
 	return (NULL);
 }

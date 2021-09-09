@@ -15,7 +15,7 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	if (var >= 10)
 	{
-		ft_putnbr(var / 10);
+		ft_putnbr_fd((var / 10), fd);
 	}
 	ft_putchar_fd((var % 10 + 48), fd);
 }

@@ -5,20 +5,12 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		j;
 	int		k;
-	int		count;
 	char	**split;
 
 	i = 0;
 	j = 0;
 	k = 0;
-	count = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-			count++;
-		i++;
-	}
-	split = (char **) malloc(sizeof(char) * (i + c + 1));
+	split = (char **) malloc(sizeof(char) * (ft_strlen(s)));
 	i = 0;
 	while (s[i] != '\0')
 	{
