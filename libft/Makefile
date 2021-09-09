@@ -10,12 +10,12 @@ SRCS =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
 		ft_putchar_fd.c ft_strcpy.c ft_putstr_fd.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_calloc.c \
 		ft_strlcpy.c
-DOTO = ${SRCS:.c=.o}
+DOTO = $(SRCS:.c=.o)
 
 BONUS =	ft_lstadd_back.c ft_lstaddfront.c \
 		ft_lstclear.c ft_lstdelone.c \
 		ft_lstlast.c ft_lstnew.c ft_lstsize.c
-BONUS_DOTO = ${BONUS:.c=.o}
+BONUS_DOTO = $(BONUS:.c=.o)
 
 INCS = includes
 NAME = libft.a
@@ -25,21 +25,21 @@ RMVE = rm -f
 EFLAGS = -Wall -Wextra -Werror
 
 .c.o:
-		${COMP} ${EFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+		$(COMP) $(EFLAGS) -c $< -o $(<:.c=.o) -I $(INCS)
 
-${NAME}: ${DOTO}
-		${LIBC} ${NAME} ${DOTO}
+$(NAME): $(DOTO)
+		$(LIBC) $(NAME) $(DOTO)
 
-bonus: ${DOTO} ${BONUS_DOTO}
-		${LIBC} ${NAME} ${DOTO} ${BONUS_DOTO}
+bonus: $(DOTO) $(BONUS_DOTO)
+		$(LIBC) $(NAME) $(DOTO) $(BONUS_DOTO)
 
-all: ${NAME}
+all: $(NAME)
 
 clean:
-		${RMVE} ${DOTO} ${BONUS_DOTO}
+		$(RMVE) $(DOTO) $(BONUS_DOTO)
 
 fclean: clean
-		${RMVE} ${NAME}
+		$(RMVE) $(NAME)
 
 re: fclean all
 
