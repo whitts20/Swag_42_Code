@@ -5,7 +5,7 @@ int	ft_count(int n)
 	int	count;
 	int	num;
 
-	count = 0;
+	count = 1;
 	if (n < 0)
 	{
 		num = -n;
@@ -14,7 +14,7 @@ int	ft_count(int n)
 	else
 		num = n;
 	if (n == 0)
-		count = 1;
+		count = 2;
 	while (num != 0)
 	{
 		num = num / 10;
@@ -25,20 +25,28 @@ int	ft_count(int n)
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		i;
+	int				i;
+	char			*str;
+	unsigned int	nbr;
 
 	i = ft_count(n);
 	str = (char *) malloc(sizeof(char) * i);
+	if (str == NULL)
+		return (NULL);
+	if (n == 0)
+		str[0] = '0';
 	if (n < 0)
 	{
 		str[0] = '-';
-		n = -n;
+		nbr = -n;
 	}
-	while (n != 0)
+	else
+		nbr = n;
+	str[--i] = '\0';
+	while (nbr != 0)
 	{
-		str[i - 1] = ((n % 10) + '0');
-		n = n / 10;
+		str[i - 1] = ((nbr % 10) + '0');
+		nbr = nbr / 10;
 		i--;
 	}
 	return (str);

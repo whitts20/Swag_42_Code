@@ -6,14 +6,14 @@ char	*ft_strrchr(const char *s, int c)
 	int	pos;
 
 	i = 0;
-	pos = 0;
+	pos = -1;
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
 			pos = i;
 		i++;
 	}
-	if (pos != 0)
+	if (pos != -1)
 		return ((char *)s + pos);
 	if (s[i] == '\0' && c == '\0')
 		return ((char *)s + i);
