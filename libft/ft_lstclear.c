@@ -10,7 +10,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		{
 			elem = (*lst)->next;
 			ft_lstdelone(elem, del);
-			lst = elem;
+			lst = &elem;
 		}
 	}
 }
