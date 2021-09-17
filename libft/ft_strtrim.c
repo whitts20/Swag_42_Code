@@ -1,56 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/17 18:30:03 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/09/17 18:30:03 by rwhitfor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-
-int	ft_start(char const *s1, char const *set)
-{
-	int		i;
-	int		s;
-
-	i = 0;
-	s = 0;
-	while (s1[i] == set[i])
-	{
-		s++;
-		i++;
-	}
-	return (s);
-}
-
-int	ft_end(char const *s1, char const *set)
-{
-	int	k;
-	int	l;
-	int	e;
-
-	k = ft_strlen(s1) - 1;
-	l = ft_strlen(set) - 1;
-	e = 0;
-	while (s1[k] == set[l])
-	{
-		e++;
-		k--;
-		l--;
-	}
-	return (e);
-}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		m;
-	int		n;
+	int		start;
+	int		end;
+	int		i;
 	char	*trim;
 
-	trim = (char *) malloc(sizeof(char)
-			* (ft_strlen(s1) - ft_start(s1, set) - ft_end(s1, set)));
+	i = 0;
+	start = 0;
+	end = ft_strlen(s1) - 1;
+	if (set == NULL)
+		return (ft_strdup(s1));
+	while ((s1[start] != '\0') && (ft_strchr(set, s1[start]) != NULL))
+		start++;
+	while (end > start && ft_strchr(set, s1[end]) != NULL)
+		end--;
+	trim = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (trim == NULL)
 		return (NULL);
-	m = ft_start(s1, set);
-	n = 0;
-	while (m < (int)ft_strlen(s1) - 1 - ft_end(s1, set))
+	while (i <= end - start)
 	{
-		trim[n] = s1[m];
-		m++;
-		n++;
+		trim[i] = s1[start + i];
+		i++;
 	}
-	trim[n] = '\0';
+	trim[i] = '\0';
 	return (trim);
 }
