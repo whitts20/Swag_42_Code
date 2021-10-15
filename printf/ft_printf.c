@@ -1,3 +1,5 @@
+#include "ft_printf.h"
+
 static t_read	*ft_arg_dec(void)
 {
 	t_read *list;
@@ -6,7 +8,7 @@ static t_read	*ft_arg_dec(void)
 	if (list == NULL)
 		return (NULL);
 	list->count = 0;
-	return (table);
+	return (list);
 }
 
 int	ft_printf(const char *str, ...)
@@ -32,7 +34,7 @@ int	ft_printf(const char *str, ...)
 		}
 		len++;
 	}
-	va_end(list->args)
+	va_end(list->args);
 	len = list->count;
 	return (len);
 }
