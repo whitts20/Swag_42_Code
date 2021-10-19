@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:29 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:29 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*str;
+	int	i;
 
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
+	if (dst == 0 && src == 0)
 		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	if (dst > src)
+	{
+		i = (int)(len) - 1;
+		while (i >= 0)
+		{
+			*(char *)(dst + i) = *(char *)(src + i);
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int)(len))
+		{
+			*(char *)(dst + i) = *(char *)(src + i);
+			i++;
+		}
+	}
+	return (dst);
 }

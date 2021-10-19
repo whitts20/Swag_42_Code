@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:31 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:31 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
+	char			*sub;
+	unsigned int	i;
 
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
+	if ((start >= (unsigned int) ft_strlen(s)) || len == 0)
+		return (ft_strdup(""));
+	sub = (char *) malloc (sizeof(char) * (len + 1));
+	i = 0;
+	if (sub == NULL)
 		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	while (s[start + i] != '\0' && i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
 }

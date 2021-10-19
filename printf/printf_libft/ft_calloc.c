@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,19 @@
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+void	*ft_calloc(size_t count, size_t size)
 {
+	size_t	i;
 	char	*str;
 
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
+	i = 0;
+	str = (char *) malloc(sizeof(char) * count * size);
 	if (str == NULL)
 		return (NULL);
-	str[*i] = '\0';
+	while (i <= (count * size))
+	{
+		str[i] = '\0';
+		i++;
+	}
 	return (str);
 }

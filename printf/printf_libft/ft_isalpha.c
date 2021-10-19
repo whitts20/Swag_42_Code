@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,9 @@
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+int	ft_isalpha(int c)
 {
-	char	*str;
-
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
-		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
 }

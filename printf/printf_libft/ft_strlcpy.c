@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:30 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:30 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+size_t	ft_strlcpy(char *dst, const char *src, size_t	dstsize)
 {
-	char	*str;
+	size_t	i;
+	size_t	counter;
 
-	while (n > 15)
+	i = 0;
+	counter = 0;
+	while (src[counter] != '\0')
 	{
-		n = n / 16;
-		*i += 1;
+		counter++;
 	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
-		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	if (dstsize != 0)
+	{
+		while (src[i] != '\0' && i < (dstsize - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (counter);
 }

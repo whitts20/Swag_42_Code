@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:29 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:29 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*str;
+	unsigned char	*a;
+	unsigned char	*b;
+	size_t			i;
 
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	a = (unsigned char *) dst;
+	b = (unsigned char *) src;
+	i = 0;
+	while (i < n)
+	{
+		a[i] = b[i];
+		i++;
+	}
+	return (dst);
 }

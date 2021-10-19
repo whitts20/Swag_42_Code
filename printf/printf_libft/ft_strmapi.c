@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:30 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:30 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*str;
+	int		i;
 
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
+	str = (char *) malloc(sizeof(char) * ft_strlen(s) + 1);
+	i = 0;
 	if (str == NULL)
 		return (NULL);
-	str[*i] = '\0';
+	while (s[i] != '\0')
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
 	return (str);
 }

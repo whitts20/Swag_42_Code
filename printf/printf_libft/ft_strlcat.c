@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:30 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:30 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	char	*str;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
-	while (n > 15)
+	i = ft_strlen(dst);
+	j = 0;
+	k = ft_strlen(src);
+	if (dstsize < i + 1)
+		return (dstsize + k);
+	else if (dstsize > i + 1)
 	{
-		n = n / 16;
-		*i += 1;
+		while (src[j] != '\0' && (j < (dstsize - i - 1)))
+		{
+			dst[i + j] = src[j];
+			j++;
+		}
 	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
-		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	dst[i + j] = '\0';
+	return (i + k);
 }

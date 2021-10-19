@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:29 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:29 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*str;
+	t_list	*start;
+	t_list	*elem;
 
-	while (n > 15)
-	{
-		n = n / 16;
-		*i += 1;
-	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
+	if (lst == NULL || f == NULL || del == NULL)
 		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	start = NULL;
+	while (lst != NULL)
+	{
+		elem = ft_lstnew(f(lst->content));
+		if (elem == NULL)
+		{
+			ft_lstclear(&start, del);
+			return (NULL);
+		}
+		lst = lst->next;
+		ft_lstadd_back(&start, elem);
+	}
+	return (start);
 }

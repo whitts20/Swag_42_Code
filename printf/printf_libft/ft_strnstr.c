@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:31 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:31 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	*str;
+	size_t	i;
+	size_t	j;
 
-	while (n > 15)
+	i = 0;
+	j = 0;
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	while ((haystack[i] != '\0') && (i < len))
 	{
-		n = n / 16;
-		*i += 1;
+		if (haystack[i] == needle[j])
+		{
+			while ((haystack[i + j] == needle[j]) && ((i + j) < len))
+			{
+				if (needle[j + 1] == '\0')
+				{
+					return ((char *)haystack + i);
+				}
+				j++;
+			}
+			j = 0;
+		}
+		i++;
 	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
-		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	return (0);
 }

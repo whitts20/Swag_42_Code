@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 13:55:28 by rwhitfor          #+#    #+#             */
-/*   Updated: 2021/10/19 13:55:28 by rwhitfor         ###   ########.fr       */
+/*   Created: 2021/10/19 13:55:29 by rwhitfor          #+#    #+#             */
+/*   Updated: 2021/10/19 13:55:29 by rwhitfor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*str;
+	unsigned char	*a;
+	unsigned char	*b;
+	size_t			i;
 
-	while (n > 15)
+	a = (unsigned char *) s1;
+	b = (unsigned char *) s2;
+	i = 0;
+	if (s1 == s2)
+		return (0);
+	while (i < n)
 	{
-		n = n / 16;
-		*i += 1;
+		if (*a != *b)
+		{
+			break ;
+		}
+		a++;
+		b++;
+		i++;
 	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
-		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	if (i == n)
+	{
+		a--;
+		b--;
+	}
+	return (*a - *b);
 }

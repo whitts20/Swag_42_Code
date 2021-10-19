@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexstr.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwhitfor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,30 @@
 
 #include "libft.h"
 
-char	*ft_hexstr(unsigned long n, int *i)
+int	ft_atoi(const char *str)
 {
-	char	*str;
+	int	i;
+	int	coefficient;
+	int	output;
 
-	while (n > 15)
+	i = 0;
+	output = 0;
+	while (str[i] == 32 || str[i] == '\n' || str[i] == '\t'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-')
 	{
-		n = n / 16;
-		*i += 1;
+		coefficient = -1;
+		i++;
 	}
-	str = (char *)malloc(sizeof(char) * (*i + 1));
-	if (str == NULL)
-		return (NULL);
-	str[*i] = '\0';
-	return (str);
+	else if (str[i] == '+')
+		i++;
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		output = output * 10 + (str[i] - '0');
+		i++;
+	}
+	if (coefficient == -1)
+		output = -output;
+	return (output);
 }
