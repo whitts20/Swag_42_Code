@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 	unsigned int	nbr;
 
 	i = ft_count(n);
-	str = (char *) malloc(sizeof(char) * i);
+	str = (char *) ft_calloc(sizeof(char), i);
 	if (str == NULL)
 		return (NULL);
 	if (n == 0)
