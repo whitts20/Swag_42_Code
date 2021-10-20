@@ -44,7 +44,6 @@ void	ft_putnbr(t_read	*list, int n)
 	if (n < 0)
 	{
 		ft_putchar(list, '-');
-		list->count += 1;
 		var = -n;
 	}
 	else

@@ -34,10 +34,7 @@ void	ft_check(t_read	*list, const char *str, int len)
 	else if (str[len] == 'u')
 		ft_putunbr(list, va_arg(list->args, unsigned int));
 	else
-	{
 		ft_putchar(list, str[len]);
-		list->count += 1;
-	}
 }
 
 static t_read	*ft_arg_dec(void)
