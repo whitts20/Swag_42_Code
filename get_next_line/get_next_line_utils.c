@@ -67,3 +67,21 @@ int	ft_strlcpy(char *dst, char *src, int dstsize)
 	}
 	return (counter);
 }
+
+int	ft_toolong(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+			count++;
+		i++;
+	}
+	return (count);
+}
