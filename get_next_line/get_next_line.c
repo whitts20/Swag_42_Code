@@ -37,6 +37,8 @@ int	ft_strchr(char *s, char c)
 			return (1);
 		i++;
 	}
+	if ((s[i] == '\0') && (c == '\0'))
+		return (1);
 	return (0);
 }
 
@@ -90,11 +92,11 @@ char	*ft_excess(char	*str, char c)
 
 char	*get_next_line(int fd)
 {
+	int			rtn;
 	char		*line;
 	char		*buf;
+	char		*eof;
 	static char	*oflw;
-	int			rtn;
-	int			i;
 
 	rtn = 1;
 	line = oflw;
@@ -103,10 +105,15 @@ char	*get_next_line(int fd)
 		rtn = read(fd, buf, BUFFER_SIZE);
 		line = ft_strjoin(line, buf);
 	}
-	if (ft_strchr(line, '\n') == 0)
+	if (ft_strchr(line, '\n') == 1)
 	{
 		oflw = ft_excess(line, '\n');
 		line = ft_strtrim(line, oflw);
+	}
+	if (ft_strchr(line, '\0') == 1)
+	{
+		eof = ft_excess(line, '\0');
+		line = ft_strtrim(line, eof);
 	}
 	return (line);
 }
