@@ -68,7 +68,7 @@ int	ft_strlcpy(char *dst, char *src, int dstsize)
 	return (counter);
 }
 
-int	ft_toolong(char *str)
+int	ft_numofnl(char *str)
 {
 	int	i;
 	int	count;
@@ -85,3 +85,19 @@ int	ft_toolong(char *str)
 	}
 	return (count);
 }
+
+/*int ft_toolong(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (count >= 2 && str[i] != '\0')
+	{
+		if (str[i] == '\n')
+			count++;
+		i++;
+	}
+	return (count);
+}*/

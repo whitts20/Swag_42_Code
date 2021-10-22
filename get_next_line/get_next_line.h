@@ -25,6 +25,6 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlcat(char *dst, char *src, int dstsize);
 int		ft_strlcpy(char *dst, char *src, int dstsize);
 int		ft_strlen(char *str);
-int		ft_toolong(char *str);
+int		ft_numofnl(char *str);
 
 #endif
