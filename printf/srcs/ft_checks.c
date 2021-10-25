@@ -66,28 +66,24 @@ void	ft_putunbr(t_read	*list, unsigned int n)
 	ft_putchar(list, (n % 10 + 48));
 }
 
-void	ft_puthex(t_read	*list, unsigned long n, char c, int check)
+void	ft_puthex(t_read	*list, unsigned int n, char c)
 {
 	char	*str;
 	int		i;
 
 	i = 1;
 	str = ft_hexstr(n, &i);
-	if (check == 1)
-		ft_putstr(list, "0x");
-	i--;
+	i -= 1;
 	while (i >= 0)
 	{
-		if (n % 16 < 10)
+		if ((n % 16) < 10)
 			str[i] = '0' + (n % 16);
-		else if (c == 'x' && check == 0)
+		else if (c == 'x')
 			str[i] = 'a' + (n % 16) - 10;
-		else if (c == 'X' && check == 0)
+		else if (c == 'X')
 			str[i] = 'A' + (n % 16) - 10;
-		else if (check == 1)
-			str[i] = 'a' + (n % 16) - 10;
 		n = n / 16;
-		i--;
+		i -= 1;
 	}
 	ft_putstr(list, str);
 	free(str);

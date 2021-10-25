@@ -22,82 +22,74 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strlcat(char *dst, char *src, int dstsize)
+char	*ft_strdup(char *str1)
 {
 	int	i;
-	int	j;
-	int	k;
+	char	*str2;
 
-	i = ft_strlen(dst);
+	i = 0;
+	str2 = (char *) malloc(sizeof(char) * ft_strlen(str1) + 1);
+	if (str2 == NULL)
+		return (NULL);
+	while (str1[i] != '\0')
+	{
+		str2[i] = str1[i];
+		i++;
+	}
+	str2[i] = '\0';
+	return (str2);
+}
+
+char	*ft_null(void)
+{
+	char	*line;
+
+	line = (char *)malloc(sizeof(char) * 1);
+	line[0] = '\0';
+	return(line);
+}
+
+char	*ft_strtrim(char *str, char c)
+{
+	int		i;
+	char	*trim;
+
+	i = 0;
+	while (str[i] != c)
+		i++;
+	trim = (char *) malloc(sizeof(char) * i);
+	i = 0;
+	while (str[i] != c)
+	{
+		trim[i] = str[i];
+		i++;
+	}
+	trim[i] = '\0';
+	free(str);
+	return (trim);
+}
+
+char	*ft_excess(char	*str, char c)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
 	j = 0;
-	k = ft_strlen(src);
-	if (dstsize < i + 1)
-		return (dstsize + k);
-	else if (dstsize > i + 1)
-	{
-		while (src[j] != '\0' && (j < (dstsize - i - 1)))
-		{
-			dst[i + j] = src[j];
-			j++;
-		}
-	}
-	dst[i + j] = '\0';
-	return (i + k);
-}
-
-int	ft_strlcpy(char *dst, char *src, int dstsize)
-{
-	int	i;
-	int	counter;
-
-	i = 0;
-	counter = 0;
-	while (src[counter] != '\0')
-	{
-		counter++;
-	}
-	if (dstsize != 0)
-	{
-		while (src[i] != '\0' && i < (dstsize - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (counter);
-}
-
-int	ft_numofnl(char *str)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	if (str == NULL)
-		return (0);
+	while (str[i] != c)
+		i++;
+	temp = (char *) malloc(sizeof(char) * (ft_strlen(str) + 1 - i));
+	if (temp == NULL)
+		return (NULL);
+	i++;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\n')
-			count++;
+		temp[j] = str[i];
 		i++;
+		j++;
 	}
-	return (count);
+	temp[j] = '\0';
+	free(str);
+	return (temp);
 }
-
-/*int ft_toolong(char *str)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (count >= 2 && str[i] != '\0')
-	{
-		if (str[i] == '\n')
-			count++;
-		i++;
-	}
-	return (count);
-}*/

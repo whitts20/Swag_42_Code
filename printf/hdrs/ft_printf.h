@@ -29,6 +29,8 @@ void	ft_putchar(t_read	*list, char c);
 void	ft_putstr(t_read	*list, char *s);
 void	ft_putnbr(t_read	*list, int n);
 void	ft_putunbr(t_read	*list, unsigned int n);
-void	ft_puthex(t_read	*list, unsigned long n, char c, int check);
+void	ft_puthex(t_read	*list, unsigned int n, char c);
+void	ft_putptr(t_read	*list, unsigned long n);
+char	*ft_ptrstr(unsigned long n, int *i);
 
 #endif

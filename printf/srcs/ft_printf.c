@@ -11,24 +11,18 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	ft_check(t_read	*list, const char *str, int len)
 {
-	int	check;
-
-	check = 0;
 	len++;
 	if (str[len] == 'c')
 		ft_putchar(list, va_arg(list->args, int));
 	else if (str[len] == 's')
 		ft_putstr(list, va_arg(list->args, char *));
-	else if (str[len] == 'p' || str[len] == 'x' || str[len] == 'X')
-	{
-		if (str[len] == 'p')
-			check = 1;
-		ft_puthex(list, va_arg(list->args, unsigned long), str[len], check);
-	}
+	else if (str[len] == 'x' || str[len] == 'X')
+		ft_puthex(list, va_arg(list->args, unsigned int), str[len]);
+	else if (str[len] == 'p')
+		ft_putptr(list, va_arg(list->args, unsigned long));
 	else if (str[len] == 'd' || str[len] == 'i')
 		ft_putnbr(list, va_arg(list->args, int));
 	else if (str[len] == 'u')

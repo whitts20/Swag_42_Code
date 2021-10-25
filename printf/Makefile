@@ -1,5 +1,6 @@
 SRCS =	srcs/ft_checks.c \
-		srcs/ft_printf.c
+		srcs/ft_printf.c \
+		srcs/ft_pointer.c
 
 OBJS = $(SRCS:.c=.o)
 

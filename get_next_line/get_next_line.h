@@ -22,9 +22,8 @@ char	*ft_excess(char	*str, char c);
 char	*ft_strtrim(char *s1, char c);
 int		ft_strchr(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
-int		ft_strlcat(char *dst, char *src, int dstsize);
-int		ft_strlcpy(char *dst, char *src, int dstsize);
 int		ft_strlen(char *str);
-int		ft_numofnl(char *str);
+char	*ft_strdup(char *str1);
+char	*ft_null(void);
 
 #endif
