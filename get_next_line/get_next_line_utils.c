@@ -52,20 +52,29 @@ char	*ft_null(void)
 char	*ft_strtrim(char *str, char c)
 {
 	int		i;
+	int		check;
 	char	*trim;
 
 	i = 0;
+	check = 0;
+	if (c == '\n')
+		check = 1;
 	while (str[i] != c)
 		i++;
-	trim = (char *) malloc(sizeof(char) * i);
+	trim = (char *)malloc(sizeof(char) * (i + check));
 	i = 0;
 	while (str[i] != c)
 	{
 		trim[i] = str[i];
 		i++;
 	}
+	if (check == 1)
+	{
+		trim[i] = '\n';
+		i++;
+	}
 	trim[i] = '\0';
-	free(str);
+	//free(str);
 	return (trim);
 }
 
@@ -90,6 +99,6 @@ char	*ft_excess(char	*str, char c)
 		j++;
 	}
 	temp[j] = '\0';
-	free(str);
+	//free(str);
 	return (temp);
 }
