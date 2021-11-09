@@ -24,13 +24,16 @@ int	ft_strlen(char *str)
 
 char	*ft_strdup(char *str1)
 {
-	int	i;
+	int		i;
 	char	*str2;
 
 	i = 0;
 	str2 = (char *) malloc(sizeof(char) * ft_strlen(str1) + 1);
 	if (str2 == NULL)
+	{
+		free(str2);
 		return (NULL);
+	}
 	while (str1[i] != '\0')
 	{
 		str2[i] = str1[i];
@@ -38,15 +41,6 @@ char	*ft_strdup(char *str1)
 	}
 	str2[i] = '\0';
 	return (str2);
-}
-
-char	*ft_null(void)
-{
-	char	*line;
-
-	line = (char *)malloc(sizeof(char) * 1);
-	line[0] = '\0';
-	return(line);
 }
 
 char	*ft_strtrim(char *str, char c)
@@ -61,7 +55,7 @@ char	*ft_strtrim(char *str, char c)
 		check = 1;
 	while (str[i] != c)
 		i++;
-	trim = (char *)malloc(sizeof(char) * (i + check));
+	trim = (char *)malloc(sizeof(char) * (i + 1 + check));
 	i = 0;
 	while (str[i] != c)
 	{
@@ -74,7 +68,6 @@ char	*ft_strtrim(char *str, char c)
 		i++;
 	}
 	trim[i] = '\0';
-	//free(str);
 	return (trim);
 }
 
@@ -90,7 +83,10 @@ char	*ft_excess(char	*str, char c)
 		i++;
 	temp = (char *) malloc(sizeof(char) * (ft_strlen(str) + 1 - i));
 	if (temp == NULL)
+	{
+		free(temp);
 		return (NULL);
+	}
 	i++;
 	while (str[i] != '\0')
 	{
@@ -99,6 +95,5 @@ char	*ft_excess(char	*str, char c)
 		j++;
 	}
 	temp[j] = '\0';
-	//free(str);
 	return (temp);
 }
