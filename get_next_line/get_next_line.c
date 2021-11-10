@@ -68,7 +68,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	rtn = 1;
 	if (oflw != NULL)
 	{
 		line = ft_strdup(oflw);
@@ -90,6 +89,7 @@ char	*get_next_line(int fd)
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
 	if (buf == NULL)
 		return (NULL);
+	rtn = 1;
 	while ((ft_strchr(line, '\n') == 0) && (rtn != 0))
 	{
 		rtn = read(fd, buf, BUFFER_SIZE);
