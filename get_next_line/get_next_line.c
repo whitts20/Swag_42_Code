@@ -24,10 +24,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	con = (char *)malloc(sizeof(con) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (con == NULL)
-	{
-		free(con);
 		return (NULL);
-	}
 	while ((s1[i] != '\0') && (s1 != NULL))
 	{
 		con[i] = s1[i];
@@ -39,6 +36,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	con[i + j] = '\0';
+	free (s1);
 	return (con);
 }
 
@@ -65,10 +63,9 @@ char	*get_next_line(int fd)
 	int			rtn;
 	char		*line;
 	char		*buf;
-	char		*tmp;
 	static char	*oflw;
-	static	int	check = 0;
-	
+	static int	check = 0;
+
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	rtn = 1;
@@ -103,44 +100,31 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buf[rtn] = '\0';
-		if (ft_strchr(buf, '\n') == 1)
-		{
-			free(oflw);
-			oflw = ft_strdup(line);
-			free(line);
-			line = ft_strjoin(oflw, buf);
-			free(oflw);
-			oflw = ft_excess(line, '\n');
-			free(buf);
-			buf = ft_strdup(line);
-			free(line);
-			line = ft_strtrim(buf, '\n');
-			free(buf);
-			return (line);
-		}
-		else
-		{
-			free(oflw);
-			oflw = ft_strdup(line);
-			free(line);
-			line = ft_strjoin(oflw, buf);
-		}
+		line = ft_append(line, buf);
 	}
-	if (ft_strchr(line, '\0') == 1)
+	free(buf);
+	if (ft_strchr(buf, '\n') == 1)
+	{
+		free(oflw);
+		oflw = ft_excess(line, '\n');
+		buf = ft_strdup(line);
+		free(line);
+		line = ft_strtrim(buf, '\n');
+		free(buf);
+	}
+	else if (ft_strchr(line, '\0') == 1)
 	{
 		if (line[0] == '\0')
 		{
 			free(line);
-			free(buf);
 			free(oflw);
 			return (NULL);
 		}
-		tmp = ft_strdup(line);
+		buf = ft_strdup(line);
 		free(line);
-		line = ft_strtrim(tmp, '\0');
+		line = ft_strtrim(buf, '\0');
 		check = 1;
 		free(oflw);
-		free(tmp);
 		free(buf);
 		oflw = NULL;
 	}

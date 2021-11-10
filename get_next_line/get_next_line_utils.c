@@ -97,3 +97,11 @@ char	*ft_excess(char	*str, char c)
 	temp[j] = '\0';
 	return (temp);
 }
+
+char	*ft_append(char *line, char *buf)
+{
+	if (line == NULL)
+		return (ft_strdup(buf));
+	else
+		return (ft_strjoin(line, buf));
+}
