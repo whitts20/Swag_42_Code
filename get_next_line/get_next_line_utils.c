@@ -68,6 +68,7 @@ char	*ft_strtrim(char *str, char c)
 		i++;
 	}
 	trim[i] = '\0';
+	free(str);
 	return (trim);
 }
 

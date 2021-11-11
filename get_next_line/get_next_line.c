@@ -36,7 +36,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	con[i + j] = '\0';
-	free (s1);
+	free(s1);
 	return (con);
 }
 
@@ -95,6 +95,7 @@ char	*ft_intl(char *oflw, int fd, int check)
 		return (NULL);
 	line = ft_read(line, buf, fd);
 	free(buf);
+	free(oflw);
 	return (line);
 }
 
@@ -106,14 +107,11 @@ char	*get_next_line(int fd)
 	static int	check = 0;
 
 	line = ft_intl(oflw, fd, check);
-	free(oflw);
 	if (ft_strchr(line, '\n') == 1)
 	{
 		oflw = ft_excess(line, '\n');
 		buf = ft_strtrim(line, '\n');
-		free(line);
-		line = ft_strdup(buf);
-		free(buf);
+		return (buf);
 	}
 	else if (ft_strchr(line, '\0') == 1)
 	{
@@ -122,12 +120,10 @@ char	*get_next_line(int fd)
 			free(line);
 			return (NULL);
 		}
-		buf = ft_strdup(line);
-		free(line);
-		line = ft_strtrim(buf, '\0');
+		buf = ft_strtrim(line, '\0');
 		check = 1;
-		free(buf);
 		oflw = NULL;
+		return (buf);
 	}
 	return (line);
 }
