@@ -58,37 +58,10 @@ int	ft_strchr(char *s, char c)
 	return (0);
 }
 
-char	*get_next_line(int fd)
+char	*ft_read(char *line, char *buf, int fd)
 {
-	int			rtn;
-	char		*line;
-	char		*buf;
-	static char	*oflw;
-	static int	check = 0;
+	int	rtn;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (NULL);
-	if (oflw != NULL)
-	{
-		line = ft_strdup(oflw);
-		if (ft_strchr(line, '\n') == 1)
-		{
-			free(oflw);
-			oflw = ft_excess(line, '\n');
-			buf = ft_strtrim(line, '\n');
-			free(line);
-			line = ft_strdup(buf);
-			free(buf);
-			return (line);
-		}
-	}
-	else if (oflw == NULL && check == 1)
-		return (NULL);
-	else
-		line = ft_strdup("");
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
-	if (buf == NULL)
-		return (NULL);
 	rtn = 1;
 	while ((ft_strchr(line, '\n') == 0) && (rtn != 0))
 	{
@@ -96,20 +69,50 @@ char	*get_next_line(int fd)
 		if (rtn < 0)
 		{
 			free(line);
-			free(buf);
 			return (NULL);
 		}
 		buf[rtn] = '\0';
 		line = ft_append(line, buf);
 	}
+	return (line);
+}
+
+char	*ft_intl(char *oflw, int fd, int check)
+{
+	char	*buf;
+	char	*line;
+
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	if (oflw != NULL)
+		line = ft_strdup(oflw);
+	else if (oflw == NULL && check == 1)
+		return (NULL);
+	else
+		line = ft_strdup("");
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
+	if (buf == NULL)
+		return (NULL);
+	line = ft_read(line, buf, fd);
 	free(buf);
-	if (ft_strchr(buf, '\n') == 1)
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	char		*buf;
+	static char	*oflw;
+	static int	check = 0;
+
+	line = ft_intl(oflw, fd, check);
+	free(oflw);
+	if (ft_strchr(line, '\n') == 1)
 	{
-		free(oflw);
 		oflw = ft_excess(line, '\n');
-		buf = ft_strdup(line);
+		buf = ft_strtrim(line, '\n');
 		free(line);
-		line = ft_strtrim(buf, '\n');
+		line = ft_strdup(buf);
 		free(buf);
 	}
 	else if (ft_strchr(line, '\0') == 1)
@@ -117,14 +120,12 @@ char	*get_next_line(int fd)
 		if (line[0] == '\0')
 		{
 			free(line);
-			free(oflw);
 			return (NULL);
 		}
 		buf = ft_strdup(line);
 		free(line);
 		line = ft_strtrim(buf, '\0');
 		check = 1;
-		free(oflw);
 		free(buf);
 		oflw = NULL;
 	}

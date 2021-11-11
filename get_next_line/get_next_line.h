@@ -25,5 +25,6 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *str1);
 char	*ft_append(char *line, char *buf);
+char	*ft_read(char *line, char *buf, int fd);
 
 #endif
